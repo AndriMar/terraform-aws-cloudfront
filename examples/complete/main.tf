@@ -28,6 +28,10 @@ module "cloudfront" {
   retain_on_delete    = false
   wait_for_deployment = false
 
+  # When you enable additional metrics for a distribution, CloudFront sends up to 8 metrics to CloudWatch in the US East (N. Virginia) Region.
+  # This rate is charged only once per month, per metric (up to 8 metrics per distribution).
+  create_monitoring_subscription = true
+
   create_origin_access_identity = true
   origin_access_identities = {
     s3_bucket_one = "My awesome CloudFront can access"
@@ -45,7 +49,7 @@ module "cloudfront" {
         http_port              = 80
         https_port             = 443
         origin_protocol_policy = "match-viewer"
-        origin_ssl_protocols   = ["TLSv1"]
+        origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
       }
 
       custom_header = [
@@ -58,6 +62,11 @@ module "cloudfront" {
           value = "SAMEORIGIN"
         }
       ]
+
+      origin_shield = {
+        enabled              = true
+        origin_shield_region = "us-east-1"
+      }
     }
 
     s3_one = {
@@ -80,11 +89,13 @@ module "cloudfront" {
   default_cache_behavior = {
     target_origin_id       = "appsync"
     viewer_protocol_policy = "allow-all"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    query_string           = true
 
-    allowed_methods = ["GET", "HEAD", "OPTIONS"]
-    cached_methods  = ["GET", "HEAD"]
-    compress        = true
-    query_string    = true
+    # This is id for SecurityHeadersPolicy copied from https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-response-headers-policies.html
+    response_headers_policy_id = "67f7725c-6f97-4210-82d7-5512b31e9d03"
 
     lambda_function_association = {
 
@@ -110,6 +121,17 @@ module "cloudfront" {
       cached_methods  = ["GET", "HEAD"]
       compress        = true
       query_string    = true
+
+      function_association = {
+        # Valid keys: viewer-request, viewer-response
+        viewer-request = {
+          function_arn = aws_cloudfront_function.example.arn
+        }
+
+        viewer-response = {
+          function_arn = aws_cloudfront_function.example.arn
+        }
+      }
     }
   ]
 
@@ -226,7 +248,7 @@ module "lambda_function" {
 
 module "records" {
   source  = "terraform-aws-modules/route53/aws//modules/records"
-  version = "~> 2.0"
+  version = "2.0.0" # @todo: revert to "~> 2.0" once 2.1.0 is fixed properly
 
   zone_id = data.aws_route53_zone.this.zone_id
 
@@ -270,3 +292,8 @@ resource "random_pet" "this" {
   length = 2
 }
 
+resource "aws_cloudfront_function" "example" {
+  name    = "example-${random_pet.this.id}"
+  runtime = "cloudfront-js-1.0"
+  code    = file("example-function.js")
+}

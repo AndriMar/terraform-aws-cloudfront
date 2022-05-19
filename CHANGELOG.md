@@ -1,11 +1,89 @@
-<a name="unreleased"></a>
-## [Unreleased]
+# Changelog
 
+All notable changes to this project will be documented in this file.
+
+### [2.9.3](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.9.2...v2.9.3) (2022-03-18)
+
+
+### Bug Fixes
+
+* Added outputs of tags of distribution ([#70](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/70)) ([bc945b4](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/commit/bc945b492078c4bb6776fb3afcde5fa1c09a53fd))
+
+### [2.9.2](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.9.1...v2.9.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* Add lifecycle clause for aws_cloudfront_origin_access_identity ([#65](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/65)) ([d31306d](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/commit/d31306d96caf66ae88f651425921175132f0322f))
+
+## [2.9.1](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.9.0...v2.9.1) (2021-11-22)
+
+
+### Bug Fixes
+
+* update CI/CD process to enable auto-release workflow ([#59](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/59)) ([507c1ba](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/commit/507c1ba4cc40420b765cc0110651242f68514821))
+
+<a name="v2.9.0"></a>
+## [v2.9.0] - 2021-11-09
+
+- feat: Added support for response headers policy ([#57](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/57))
+
+
+<a name="v2.8.0"></a>
+## [v2.8.0] - 2021-10-12
+
+- Updated CHANGELOG
+- feat: Add support for additional CloudFront metrics ([#54](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/54))
+- docs: Add TLSv1.1 and TLSv1.2 for origin_ssl_protocols in examples ([#51](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/51))
+
+
+<a name="v2.7.0"></a>
+## [v2.7.0] - 2021-08-13
+
+- Updated CHANGELOG
+- feat: Added support for connection_attempts, connection_timeout, and origin_shield ([#47](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/47))
+
+
+<a name="v2.6.0"></a>
+## [v2.6.0] - 2021-06-28
+
+- Updated CHANGELOG
+- feat: Add support of realtime_log_config_arn (no creation) ([#31](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/31))
+
+
+<a name="v2.5.0"></a>
+## [v2.5.0] - 2021-05-28
+
+- Updated CHANGELOG
+- feat: Support for CloudFront Functions ([#41](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/41))
+
+
+<a name="v2.4.0"></a>
+## [v2.4.0] - 2021-05-07
+
+- Updated CHANGELOG
+- fix: Use empty list for headers by default instead of null ([#39](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/39))
+
+
+<a name="v2.3.0"></a>
+## [v2.3.0] - 2021-05-05
+
+- Updated CHANGELOG
+- fix: Use empty origin_path by default ([#38](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/38))
+- chore: update CI/CD to use stable `terraform-docs` release artifact and discoverable Apache2.0 license ([#36](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/36))
+
+
+<a name="v2.2.0"></a>
+## [v2.2.0] - 2021-04-30
+
+- Updated CHANGELOG
+- feat: Adding support for trusted_key_groups in ordered_cache_behavior ([#35](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/35))
 
 
 <a name="v2.1.0"></a>
 ## [v2.1.0] - 2021-04-27
 
+- Updated CHANGELOG
 - feat: added support of trusted_key_groups ([#33](https://github.com/terraform-aws-modules/terraform-aws-cloudfront/issues/33))
 
 
@@ -114,7 +192,15 @@
 - Add most of the code
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.9.0...HEAD
+[v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.8.0...v2.9.0
+[v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.7.0...v2.8.0
+[v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.6.0...v2.7.0
+[v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.5.0...v2.6.0
+[v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.4.0...v2.5.0
+[v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.3.0...v2.4.0
+[v2.3.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.2.0...v2.3.0
+[v2.2.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v2.0.0...v2.1.0
 [v2.0.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v1.9.0...v2.0.0
 [v1.9.0]: https://github.com/terraform-aws-modules/terraform-aws-cloudfront/compare/v1.8.0...v1.9.0
